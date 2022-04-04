@@ -14,7 +14,7 @@ public class EkgguiController implements EKGObserver {
     public TextArea ekgView;
 
     public void startEkg(MouseEvent mouseEvent) {
-        ekgController.startrecording();
+        ekgController.startRecording();
         ekgController.registerObserver(this);
     }
 

@@ -2,6 +2,6 @@ package business;
 import gui.EkgguiController;
 
 public interface EkgController {
-    void startrecording();
+    void startRecording();
     void registerObserver(EKGObserver ekgObserver);
 }

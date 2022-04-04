@@ -9,7 +9,7 @@ public class EkgControllerImpl implements EkgController, EKGObserver {
     private EKGObserver observer;
 
     @Override
-    public void startrecording() {
+    public void startRecording() {
         ekgDataRecorder.record();
         ekgDataRecorder.setObserver(this);
     }
