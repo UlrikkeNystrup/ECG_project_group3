@@ -1,9 +1,9 @@
 package data;
 
-import business.EKGObserver;
+import business.EcgObserver;
 //Subject
-public class DummyEKGRecorder implements EkgDataRecorder {
-    private EKGObserver observer;
+public class DummyEcgRecorder implements EcgDataRecorder {
+    private EcgObserver observer;
 
     @Override
     public void record() {
@@ -16,7 +16,7 @@ public class DummyEKGRecorder implements EkgDataRecorder {
                     while(true) {
                         Thread.sleep(25);
                         if (observer != null) {
-                            observer.handle(new EKGDataImpl(Math.random()*200*(-1)+200, time));
+                            observer.handle(new EcgDataImpl(Math.random()*200*(-1)+200, time));
                         }//Math.random()*(-1)*(-180), time));
                         time +=1;
                     }
@@ -30,7 +30,7 @@ public class DummyEKGRecorder implements EkgDataRecorder {
     }
 
     @Override
-    public void setObserver(EKGObserver observer) {
+    public void setObserver(EcgObserver observer) {
         this.observer=observer;
     }
 }

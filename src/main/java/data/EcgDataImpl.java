@@ -1,10 +1,10 @@
 package data;
 
-public class EKGDataImpl implements EKGData {
+public class EcgDataImpl implements EcgData {
     private double voltage;
     private double time;
 
-    public EKGDataImpl(double voltage, double time) {
+    public EcgDataImpl(double voltage, double time) {
         this.time=time;
         this.voltage=voltage;
     }
