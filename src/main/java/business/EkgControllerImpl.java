@@ -5,7 +5,7 @@ import data.EKGData;
 import data.EkgDataRecorder;
 
 public class EkgControllerImpl implements EkgController, EKGObserver {
-    EkgDataRecorder ekgDataRecorder = new DummyEKGRecorder();
+    private EkgDataRecorder ekgDataRecorder = new DummyEKGRecorder();
     private EKGObserver observer;
 
     @Override

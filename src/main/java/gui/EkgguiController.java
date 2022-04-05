@@ -7,11 +7,13 @@ import data.EKGData;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextArea;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.shape.Polyline;
 
 public class EkgguiController implements EKGObserver {
-    EkgController ekgController = new EkgControllerImpl();
-    @FXML
-    public TextArea ekgView;
+    public Polyline ekgLine;
+    private EkgController ekgController = new EkgControllerImpl();
+
+
 
     public void startEkg(MouseEvent mouseEvent) {
         ekgController.startRecording();
@@ -20,7 +22,8 @@ public class EkgguiController implements EKGObserver {
 
     @Override
     public void handle(EKGData ekgData) {
-        ekgView.setText(ekgView.getText()+"\n" + ekgData);
+    //    ekgView.setText(ekgView.getText()+"\n" + ekgData);
+        ekgLine.getPoints().addAll(ekgData.getTime(),ekgData.getVoltage());
 
     }
 }

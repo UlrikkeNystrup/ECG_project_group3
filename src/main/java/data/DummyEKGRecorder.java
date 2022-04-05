@@ -12,11 +12,13 @@ public class DummyEKGRecorder implements EkgDataRecorder {
             public void run() {
                 try {
                     //Dummy data generation
+                    double time = 0;
                     while(true) {
-                        Thread.sleep(500);
+                        Thread.sleep(25);
                         if (observer != null) {
-                            observer.handle(new EKGDataImpl(Math.random(), Math.random()));
-                        }
+                            observer.handle(new EKGDataImpl(Math.random()*200*(-1)+200, time));
+                        }//Math.random()*(-1)*(-180), time));
+                        time +=1;
                     }
                 } catch (InterruptedException e) {
                     e.printStackTrace();
