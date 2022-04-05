@@ -63,7 +63,7 @@
            </Label>
        </children>
    </GridPane>
-   <AnchorPane layoutX="345.0" layoutY="1.0" prefHeight="259.0" prefWidth="312.0">
+   <AnchorPane layoutX="166.0" layoutY="1.0" prefHeight="259.0" prefWidth="491.0">
       <children>
          <Polyline fx:id="ekgLine">
 
