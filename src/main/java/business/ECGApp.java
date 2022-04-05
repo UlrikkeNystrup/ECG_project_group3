@@ -18,7 +18,7 @@ public class ECGApp extends Application {
     public void start(Stage stage) throws Exception {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui.fxml"));
         AnchorPane anchorPane = loader.load();
-        Scene scene = new Scene(anchorPane, 600,600);
+        Scene scene = new Scene(anchorPane, 1000,1000);
         stage.setTitle("ECG App");
         stage.setScene(scene);
         stage.show();
