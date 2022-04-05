@@ -9,7 +9,7 @@
 
 <AnchorPane prefHeight="401.0" prefWidth="597.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.EcgGuiController">
 
-    <Button accessibleRole="BUTTON" layoutX="8.0" layoutY="14.0" mnemonicParsing="false" onMouseClicked="#startEkg" prefHeight="40.0" prefWidth="155.0" style="-fx-background-color: #16cd2b;" text="Start Måling" textFill="#161716">
+    <Button accessibleRole="BUTTON" layoutX="8.0" layoutY="14.0" mnemonicParsing="false" onMouseClicked="#startEcg" prefHeight="40.0" prefWidth="155.0" style="-fx-background-color: #16cd2b;" text="Start Måling" textFill="#161716">
       <font>
          <Font name="System Bold" size="18.0" />
       </font>

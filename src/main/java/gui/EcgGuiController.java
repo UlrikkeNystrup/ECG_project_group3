@@ -13,7 +13,7 @@ public class EcgGuiController implements EcgObserver {
 
 
 
-    public void startEkg(MouseEvent mouseEvent) {
+    public void startEcg(MouseEvent mouseEvent) {
         ecgController.startRecording();
         ecgController.registerObserver(this);
     }
