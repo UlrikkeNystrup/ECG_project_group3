@@ -4,6 +4,7 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 
@@ -18,6 +19,7 @@ public class ECGApp extends Application {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui.fxml"));
         AnchorPane anchorPane = loader.load();
         Scene scene = new Scene(anchorPane, 600,600);
+        stage.setTitle("ECG App");
         stage.setScene(scene);
         stage.show();
 
