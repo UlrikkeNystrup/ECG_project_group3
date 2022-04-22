@@ -9,7 +9,7 @@ public class MysqlCon {
         try {
             // get a connection to database:
             Class.forName("com.mysql.jdbc.Driver");
-            Connection connection = DriverManager.getConnection("jdbc:mysql://localhost/s215843?", "s215843", "jR7TTGSR3dcoVhKeiAUHU");
+            Connection connection = DriverManager.getConnection("jdbc:mysql://db.diplomportal.dk/s215843?", "s215843", "jR7TTGSR3dcoVhKeiAUHU");
 
             // create a statement:
             PreparedStatement statement = connection.prepareStatement("SELECT * FROM doctor WHERE auth_id = 222");
