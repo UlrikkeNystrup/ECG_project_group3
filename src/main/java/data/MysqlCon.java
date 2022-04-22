@@ -1,20 +1,43 @@
 package data;
 
 import java.sql.*;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
-import java.sql.Statement;
+
 
 public class MysqlCon {
     public static void main(String[] args) {
+
         try {
-            Class.forName("mysql-db.caprover.diplomportal.dk");
-            Connection con = DriverManager.getConnection("s215843", "s215843", "jR7TTGSR3dcoVhKeiAUHU");
-            Statement stmt = con.createStatement();
-            ResultSet rs = stmt.executeQuery("select * form emp");
-            while (rs.next())
-                System.out.println(rs.getInt(1) + " " + rs.getString(2) + " " + rs.getString(3));
+            // get a connection to database:
+            Class.forName("com.mysql.jdbc.Driver");
+            Connection connection = DriverManager.getConnection("jdbc:mysql://localhost/s215843?", "s215843", "jR7TTGSR3dcoVhKeiAUHU");
+
+            // create a statement:
+            PreparedStatement statement = connection.prepareStatement("SELECT * FROM doctor WHERE auth_id = 222");
+            //statement.setString(222,auth_id);
+
+            //Exsecute SQL query:
+            ResultSet resultset = statement.executeQuery();
+
+            // Process the result set:
+
+            while (resultset.next())
+                System.out.println(resultset.getString("firstname") + " " + resultset.getString("lastname"));
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }}}
+
+            /*
+            String sql = "insert into doctor"
+                    + "(auth_id, firstname, lastname)"
+                    + " values ('111', 'david', 'olesen')";
+            statement.executeUpdate(sql);
+
+            System.out.println("Insert complete");
+
+
             con.close();
         }catch(Exception e){System.out.println(e);}
-}}
+*/
+
+
