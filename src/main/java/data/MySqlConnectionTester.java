@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.Scanner;
 
 public class MySqlConnectionTester {
     public static void main(String[] args) {
@@ -16,9 +17,10 @@ public class MySqlConnectionTester {
 
             //Execute SQL query
             //indsæt ny række i tabellen doctor
+
             String sql = "INSERT INTO doctor"
                     + "(auth_id, first_name, sur_name)"
-                    + " values ('1', 'Kenneth', 'Petersen')";
+                    + " values ('4', 'Signe', 'Koefoed')";
             statement.executeUpdate(sql);
             System.out.println("Insert complete");
 
@@ -32,10 +34,17 @@ public class MySqlConnectionTester {
                 System.out.println(show_tables.getString(2));
                 System.out.println(show_tables.getString(3));
             }
+
+            //luk forbindelsen til databasen efter brug
+            connection.close();
+            System.out.println("Connection closed");
+
         }catch(SQLException e){
                 e.printStackTrace();
-            }
         }
 
+
     }
+
+}
 
