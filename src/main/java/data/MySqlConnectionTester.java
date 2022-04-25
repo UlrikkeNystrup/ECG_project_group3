@@ -7,6 +7,7 @@ import java.sql.Statement;
 import java.util.Scanner;
 
 public class MySqlConnectionTester {
+
     public static void main(String[] args) {
         //etabler forbindelsen til databasen ved at oprette et Connection objekt og bruge ConnectionController klassens metode getConnection
         Connection connection = MySqlConnection.getConnection();

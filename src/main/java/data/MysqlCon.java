@@ -1,7 +1,6 @@
 package data;
-
 import java.sql.*;
-
+//SLET DENNE KLASSE
 
 public class MysqlCon {
     public static void main(String[] args) {
@@ -13,7 +12,6 @@ public class MysqlCon {
                     + "user=s215849&password=9dp9i23fJclFnSu68dWl1");
             // Julianes database: "jdbc:mysql://db.diplomportal.dk/s215843?", "s215843", "jR7TTGSR3dcoVhKeiAUHU"
 
-
             // create a statement:
             PreparedStatement statement = connection.prepareStatement("SELECT * FROM doctor WHERE auth_id = 20");
             //connection.prepareStatement("SELECT * FROM doctor WHERE auth_id = 222");
@@ -24,28 +22,17 @@ public class MysqlCon {
             ResultSet resultset = statement.executeQuery("SHOW TABLES");
 
             // Process the result set:
-
             while (resultset.next())
                 System.out.println(resultset.getString(1));
                 System.out.println(resultset.getString(2));
                 System.out.println(resultset.getString(3));
                 //System.out.println(resultset.getString("firstname") + " " + resultset.getString("lastname"));
 
+            connection.close();
         } catch (Exception e) {
             e.printStackTrace();
-        }}}
-
-            /*
-            String sql = "insert into doctor"
-                    + "(auth_id, firstname, lastname)"
-                    + " values ('111', 'david', 'olesen')";
-            statement.executeUpdate(sql);
-
-            System.out.println("Insert complete");
-
-
-            connection.close();
-        }catch(Exception e){System.out.println(e);}
-*/
+        }
+    }
+}
 
 

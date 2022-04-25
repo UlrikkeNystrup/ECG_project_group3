@@ -22,7 +22,6 @@ public class MySqlConnection {
         return connection;
     }
 
-    private MySqlConnection(){
-
+    private MySqlConnection(){ //hvad bruges denne konstruktør til? slet?
     }
 }
