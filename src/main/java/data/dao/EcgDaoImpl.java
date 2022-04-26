@@ -1,7 +1,7 @@
 package data.dao;
 
 import data.MySqlConnection;
-import data.dto.EcgDto;
+import data.dto.EcgDtoImpl;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -10,13 +10,14 @@ import java.util.List;
 public class EcgDaoImpl implements EcgDao {
 
     @Override
-    public void save(EcgDto ecgDto) {
+    public void save(EcgDtoImpl ecgDto) {
 
         Connection connection= MySqlConnection.getConnection();
         try {
-            PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO ecgData(time, voltage) VALUES (?,?)");
-            preparedStatement.setString(1,ecgDto.getTime());
-            preparedStatement.setDouble(2,ecgDto.getVoltage());
+            PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO ecgData(patient_ID, time, voltage) VALUES (?,?,?)");
+            preparedStatement.setString(1,ecgDto.getId());
+            preparedStatement.setTimestamp(2,ecgDto.getTime());
+            preparedStatement.setDouble(3,ecgDto.getVoltage());
             preparedStatement.execute();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -24,16 +25,16 @@ public class EcgDaoImpl implements EcgDao {
     }
 
     @Override
-    public List<EcgDto> load(Timestamp time) {
-        List<EcgDto> data = new ArrayList<>();
+    public List<EcgDtoImpl> load(Timestamp time) {
+        List<EcgDtoImpl> data = new ArrayList<>();
         Connection connection = MySqlConnection.getConnection();
         try {
             PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM ecgData WHERE time > ? ");
-            preparedStatement.setTimestamp(1,time);
+            preparedStatement.setTimestamp(2,time);
             ResultSet resultSet = preparedStatement.executeQuery();
             while(resultSet.next()){
-                EcgDto ecgDto = new EcgDto();
-                ecgDto.setId(resultSet.getInt("patient_ID"));  //kan det laves om til VARCHAR, så det kan indeholde CPR-nummer + laves om i databasen
+                EcgDtoImpl ecgDto = new EcgDtoImpl();
+                ecgDto.setId(resultSet.getString("patient_ID"));
                 ecgDto.setTime(resultSet.getTimestamp("time"));
                 ecgDto.setVoltage(resultSet.getDouble("voltage"));
                 data.add(ecgDto);

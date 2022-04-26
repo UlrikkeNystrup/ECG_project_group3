@@ -1,8 +1,9 @@
 package business;
 
 import data.DummyEcgRecorder;
-import data.EcgData;
+import data.dto.EcgDto;
 import data.EcgDataRecorder;
+import data.dto.EcgDtoImpl;
 
 public class EcgControllerImpl implements EcgController, EcgObserver {
     private EcgDataRecorder ecgDataRecorder = new DummyEcgRecorder();
@@ -20,9 +21,9 @@ public class EcgControllerImpl implements EcgController, EcgObserver {
     }
 
     @Override
-    public void handle(EcgData ecgData) {
+    public void handle(EcgDtoImpl ecgDtoImpl) {
         if(observer!=null){
-            observer.handle(ecgData);
+            observer.handle(ecgDtoImpl);
         }
     }
 }

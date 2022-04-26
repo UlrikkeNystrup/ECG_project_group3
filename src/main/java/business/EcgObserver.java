@@ -1,7 +1,8 @@
 package business;
 
-import data.EcgData;
+import data.dto.EcgDto;
+import data.dto.EcgDtoImpl;
 
 public interface EcgObserver {
-    void handle(EcgData ecgData);
+    void handle(EcgDtoImpl ecgDtoImpl);
 }

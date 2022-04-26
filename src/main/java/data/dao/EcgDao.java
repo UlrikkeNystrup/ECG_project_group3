@@ -1,11 +1,11 @@
 package data.dao;
 
-import data.dto.EcgDto;
+import data.dto.EcgDtoImpl;
 
 import java.sql.Timestamp;
 import java.util.List;
 
 public interface EcgDao {
-    void save(EcgDto ecgDto);
-    List<EcgDto> load(Timestamp time);
+    void save(EcgDtoImpl ecgDto);
+    List<EcgDtoImpl> load(Timestamp time);
 }

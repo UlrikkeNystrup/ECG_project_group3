@@ -1,6 +1,10 @@
 package data;
 
 import business.EcgObserver;
+import data.dto.EcgDtoImpl;
+
+import java.sql.Timestamp;
+
 //Subject
 public class DummyEcgRecorder implements EcgDataRecorder {
     private EcgObserver observer;
@@ -12,13 +16,14 @@ public class DummyEcgRecorder implements EcgDataRecorder {
             public void run() {
                 try {
                     //Dummy data generation
-                    double time = 0;
                     while(true) {
+                        EcgDtoImpl ecgDtoImpl = new EcgDtoImpl();
+                        ecgDtoImpl.setTime(new Timestamp(System.currentTimeMillis()));
+                        ecgDtoImpl.setVoltage(Math.random()*200*(-1)+200);
+                        if(observer != null) {
+                            observer.handle(ecgDtoImpl);
+                        }
                         Thread.sleep(25);
-                        if (observer != null) {
-                            observer.handle(new EcgDataImpl(Math.random()*200*(-1)+200, time));
-                        }//Math.random()*(-1)*(-180), time));
-                        time +=1;
                     }
                 } catch (InterruptedException e) {
                     e.printStackTrace();
@@ -28,6 +33,7 @@ public class DummyEcgRecorder implements EcgDataRecorder {
         }).start();
 
     }
+
 
     @Override
     public void setObserver(EcgObserver observer) {
