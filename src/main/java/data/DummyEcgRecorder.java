@@ -16,6 +16,7 @@ public class DummyEcgRecorder implements EcgDataRecorder {
             public void run() {
                 try {
                     //Dummy data generation
+
                     while(true) {
                         EcgDtoImpl ecgDtoImpl = new EcgDtoImpl();
                         ecgDtoImpl.setTime(new Timestamp(System.currentTimeMillis()));
