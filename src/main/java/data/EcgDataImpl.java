@@ -8,6 +8,7 @@ public class EcgDataImpl implements EcgData {
         this.time=time;
         this.voltage=voltage;
     }
+    //bruger vi denne konstruktør?
 
     @Override
     public double getVoltage() {
