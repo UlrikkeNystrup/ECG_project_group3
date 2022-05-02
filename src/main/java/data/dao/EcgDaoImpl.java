@@ -11,7 +11,7 @@ public class EcgDaoImpl implements EcgDao {
 
     @Override
     public void save(EcgDtoImpl ecgDto) {
-
+        // denne metode bruger vi til at gemme EKG data i databasen
         Connection connection= MySqlConnection.getConnection();
         try {
             PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO ecgData(patient_ID, time, voltage) VALUES (?,?,?)");
@@ -26,6 +26,7 @@ public class EcgDaoImpl implements EcgDao {
 
     @Override
     public List<EcgDtoImpl> load(Timestamp time) {
+        //vi har ikke anvendt denne metode endnu, men skal bruges til at hente lagret data i databasen
         List<EcgDtoImpl> data = new ArrayList<>();
         Connection connection = MySqlConnection.getConnection();
         try {

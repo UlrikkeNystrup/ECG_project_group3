@@ -3,8 +3,7 @@ package data.dto;
 import java.sql.Timestamp;
 
 public class EcgDtoImpl implements EcgDto {
-    //skal denne klasse erstatte EcgDataImpl og dermed implementerer EcgData interfacet, som så også skal indeholde setID() og getID()?
-    //hvis tilfældet -> så fjern udkommenteringer på override
+    //denne klasse har erstattet vores tidligere klasse EcgDataImpl
     private String patient_ID;
     private Timestamp time;
     private double voltage;
@@ -14,9 +13,8 @@ public class EcgDtoImpl implements EcgDto {
         this.patient_ID = patient_ID;
         this.time = time;
         this.voltage = voltage;
-
     }
-
+bruger vi denne konstruktør?
  */
 
     @Override
@@ -40,13 +38,9 @@ public class EcgDtoImpl implements EcgDto {
         return time;
     }
 
-   // @Override
+    @Override
     public void setTime(Timestamp time) {
         this.time = time;
     }
-
-
-
-
 }
 
