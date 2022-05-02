@@ -28,7 +28,7 @@ public class EcgControllerImpl implements EcgController, EcgObserver {
         if(observer!=null){
             observer.handle(ecgDtoImpl);
         }
-        ecgDtoImpl.setId("Johny");
+        ecgDtoImpl.setPatientId("Johny");
         ecgDaoImpl.save(ecgDtoImpl);
     }
 }

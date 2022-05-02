@@ -14,8 +14,8 @@ public class EcgDaoImpl implements EcgDao {
         // denne metode bruger vi til at gemme EKG data i databasen
         Connection connection= MySqlConnection.getConnection();
         try {
-            PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO ecgData(patient_ID, time, voltage) VALUES (?,?,?)");
-            preparedStatement.setString(1,ecgDto.getId());
+            PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO ecgData(patientId, time, voltage) VALUES (?,?,?)");
+            preparedStatement.setString(1,ecgDto.getPatientId());
             preparedStatement.setTimestamp(2,ecgDto.getTime());
             preparedStatement.setDouble(3,ecgDto.getVoltage());
             preparedStatement.execute();
@@ -35,7 +35,7 @@ public class EcgDaoImpl implements EcgDao {
             ResultSet resultSet = preparedStatement.executeQuery();
             while(resultSet.next()){
                 EcgDtoImpl ecgDto = new EcgDtoImpl();
-                ecgDto.setId(resultSet.getString("patient_ID"));
+                ecgDto.setPatientId(resultSet.getString("patientId"));
                 ecgDto.setTime(resultSet.getTimestamp("time"));
                 ecgDto.setVoltage(resultSet.getDouble("voltage"));
                 data.add(ecgDto);

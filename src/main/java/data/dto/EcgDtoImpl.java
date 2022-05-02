@@ -4,7 +4,7 @@ import java.sql.Timestamp;
 
 public class EcgDtoImpl implements EcgDto {
     //denne klasse har erstattet vores tidligere klasse EcgDataImpl
-    private String patient_ID;
+    private String patientId;
     private Timestamp time;
     private double voltage;
 
@@ -18,11 +18,11 @@ bruger vi denne konstruktør?
  */
 
     @Override
-    public String getId() {return patient_ID;}
+    public String getPatientId() {return patientId;}
 
     @Override
-    public void setId(String id) {
-        this.patient_ID = id;
+    public void setPatientId(String patientId) {
+        this.patientId = patientId;
     }
 
    @Override
