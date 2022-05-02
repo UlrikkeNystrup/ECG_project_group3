@@ -15,7 +15,7 @@ public class DummyEcgRecorder implements EcgDataRecorder {
             @Override
             public void run() {
                 try {
-                    //Dummy data generation
+                    //Dummy data generering
                     while(true) {
                         EcgDtoImpl ecgDtoImpl = new EcgDtoImpl();
                         ecgDtoImpl.setTime(new Timestamp(System.currentTimeMillis()));
@@ -33,7 +33,6 @@ public class DummyEcgRecorder implements EcgDataRecorder {
         }).start();
 
     }
-
 
     @Override
     public void setObserver(EcgObserver observer) {

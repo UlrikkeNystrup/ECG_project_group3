@@ -1,13 +1,16 @@
 package business;
 
 import data.DummyEcgRecorder;
+import data.dao.EcgDaoImpl;
 import data.dto.EcgDto;
 import data.EcgDataRecorder;
 import data.dto.EcgDtoImpl;
+import javafx.scene.control.TextField;
 
 public class EcgControllerImpl implements EcgController, EcgObserver {
     private EcgDataRecorder ecgDataRecorder = new DummyEcgRecorder();
     private EcgObserver observer;
+    private EcgDaoImpl ecgDaoImpl = new EcgDaoImpl();
 
     @Override
     public void startRecording() {
@@ -25,5 +28,7 @@ public class EcgControllerImpl implements EcgController, EcgObserver {
         if(observer!=null){
             observer.handle(ecgDtoImpl);
         }
+        ecgDtoImpl.setPatientId("Johny");
+        ecgDaoImpl.save(ecgDtoImpl);
     }
 }

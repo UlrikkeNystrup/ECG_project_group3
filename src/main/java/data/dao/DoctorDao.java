@@ -1,13 +1,14 @@
 package data.dao;
 
-import data.dto.DoctorDto;
+import data.dto.DoctorDtoImpl;
 
 import java.util.List;
 
 public interface DoctorDao {
-    List<DoctorDto> getAll();
-    DoctorDto get(String id);
-    void save(DoctorDto doc);
-    void update(DoctorDto doc);
+    //vi bruger ikke dette interface endnu
+    List<DoctorDtoImpl> getAll();
+    DoctorDtoImpl get(String id);
+    void save(DoctorDtoImpl doctorDtoImpl);
+    void update(DoctorDtoImpl doctorDtoImpl);
     void delete(String id);
 }
