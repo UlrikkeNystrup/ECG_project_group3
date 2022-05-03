@@ -18,7 +18,7 @@ public class EcgGuiController implements EcgObserver {
 
 
     public void startEcg(MouseEvent mouseEvent) {
-        ecgController.startRecording();
+        ecgController.startRecording(CPR.getText());
         startTime = System.currentTimeMillis();
         ecgController.registerObserver(this);
     }

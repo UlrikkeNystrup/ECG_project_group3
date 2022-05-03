@@ -1,6 +1,6 @@
 package business;
 
 public interface EcgController {
-    void startRecording();
+    void startRecording(String text);
     void registerObserver(EcgObserver ecgObserver);
 }
