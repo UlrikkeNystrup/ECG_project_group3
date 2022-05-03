@@ -5,20 +5,26 @@ import business.EcgController;
 import business.EcgControllerImpl;
 import data.dto.EcgDto;
 import data.dto.EcgDtoImpl;
+import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
+import javafx.scene.paint.Paint;
 import javafx.scene.shape.Polyline;
 
 
 public class EcgGuiController implements EcgObserver {
     public Polyline ecgLine;
     public TextField CPR;
+    public Button startknap;
     private EcgController ecgController = new EcgControllerImpl();
     long startTime = 0;
 
 
     public void startEcg(MouseEvent mouseEvent) {
         ecgController.startRecording(CPR.getText());
+        //startknap.setBackground(new Background(new BackgroundFill(new Paint(new ))));
         startTime = System.currentTimeMillis();
         ecgController.registerObserver(this);
     }

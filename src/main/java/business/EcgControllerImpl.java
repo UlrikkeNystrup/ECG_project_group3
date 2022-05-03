@@ -29,6 +29,8 @@ public class EcgControllerImpl implements EcgController, EcgObserver {
             observer.handle(ecgDtoImpl);
         }
         ecgDtoImpl.setPatientId(CPR); //indsætter data for patientId
-        ecgDaoImpl.save(ecgDtoImpl);
+        if (CPR != null && !CPR.isEmpty()) {
+            ecgDaoImpl.save(ecgDtoImpl);
+        }
     }
 }
