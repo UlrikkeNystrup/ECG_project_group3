@@ -18,7 +18,7 @@ public class DummyEcgRecorder implements EcgDataRecorder {
                     //Dummy data generering
                     while(true) {
                         EcgDtoImpl ecgDtoImpl = new EcgDtoImpl();
-                        ecgDtoImpl.setTime(new Timestamp(System.currentTimeMillis()));
+                        ecgDtoImpl.setTime(new Timestamp(System.currentTimeMillis())); //returnerer aktuel tid i millisekunder, Timestamp er
                         ecgDtoImpl.setVoltage(Math.random()*200*(-1)+200);
                         if(observer != null) {
                             observer.handle(ecgDtoImpl);
