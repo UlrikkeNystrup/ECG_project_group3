@@ -15,13 +15,13 @@ public class DummyEcgRecorder implements EcgDataRecorder {
             @Override
             public void run() {
                 try {
-                    //Dummy data generering
+                    //Dumy data generering
                     while(true) {
                         EcgDtoImpl ecgDtoImpl = new EcgDtoImpl();
                         ecgDtoImpl.setTime(new Timestamp(System.currentTimeMillis())); //returnerer aktuel tid i millisekunder, Timestamp er
                         ecgDtoImpl.setVoltage(Math.random()*200*(-1)+200);
                         if(observer != null) {
-                            observer.handle(ecgDtoImpl);
+                            observer.notify(ecgDtoImpl);
                         }
                         Thread.sleep(25);
                     }

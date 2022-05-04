@@ -30,7 +30,7 @@ public class EcgGuiController implements EcgObserver {
     }
 
     @Override
-    public void handle(EcgDtoImpl ecgDtoImpl) {
+    public void notify(EcgDtoImpl ecgDtoImpl) {
     //    ekgView.setText(ekgView.getText()+"\n" + ekgData);
         ecgLine.getPoints().addAll(((ecgDtoImpl.getTime().getTime()*1.0)-startTime)/25,ecgDtoImpl.getVoltage());
         //når man ganger med 1.0 så konverteres fra long til double. Dividerer med 25, for at få stregen længere ned på skærmen
