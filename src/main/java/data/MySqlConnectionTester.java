@@ -6,6 +6,8 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Scanner;
 
+//OBS. bare en klasse til test af databasen, anvendes ikke i applikationen
+
 public class MySqlConnectionTester {
 
     public static void main(String[] args) {

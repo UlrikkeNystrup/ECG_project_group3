@@ -6,6 +6,7 @@ import data.dto.EcgDtoImpl;
 import java.sql.Timestamp;
 
 //Subject
+//denne klasse genererer simulerede EKG data
 public class DummyEcgRecorder implements EcgDataRecorder {
     private EcgObserver observer;
 
@@ -31,11 +32,10 @@ public class DummyEcgRecorder implements EcgDataRecorder {
 
             }
         }).start();
-
     }
 
     @Override
     public void setObserver(EcgObserver observer) {
         this.observer=observer;
-    }
+    } //vi sætter en observer
 }

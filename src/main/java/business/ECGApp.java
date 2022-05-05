@@ -7,7 +7,6 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
-
 public class ECGApp extends Application {
 
     public static void run(){
@@ -22,8 +21,5 @@ public class ECGApp extends Application {
         stage.setTitle("ECG App");
         stage.setScene(scene);
         stage.show();
-
-
-
     }
 }

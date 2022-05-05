@@ -5,7 +5,7 @@ import data.dto.DoctorDtoImpl;
 import java.util.List;
 
 public interface DoctorDao {
-    //vi bruger ikke dette interface endnu
+    //vi har ikke implementeret dette interface endnu
     List<DoctorDtoImpl> getAll();
     DoctorDtoImpl get(String id);
     void save(DoctorDtoImpl doctorDtoImpl);

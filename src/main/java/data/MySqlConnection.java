@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
+//dennne klasse opretter forbindelsen til databasen
 public class MySqlConnection {
 
     //Create a Connection object

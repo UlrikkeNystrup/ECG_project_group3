@@ -21,7 +21,7 @@ public class EcgGuiController implements EcgObserver {
     private EcgController ecgController = new EcgControllerImpl();
     long startTime = 0;
 
-
+//metode til håndtering af "museevent", hvis der trykkes på knappen "Start måling"
     public void startEcg(MouseEvent mouseEvent) {
         ecgController.startRecording(CPR.getText());
         //startknap.setBackground(new Background(new BackgroundFill(new Paint(new ))));

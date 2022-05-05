@@ -1,7 +1,7 @@
 package data.dto;
 
 public class DoctorDtoImpl implements DoctorDto {
-    //denne klasse bruger vi ikke endnu
+    //denne klasse bruger vi ikke endnu, da vi endnu ikke har implementeret DoctorDao
     private String name;
     private String id;
 

@@ -14,7 +14,7 @@ public class EcgDtoImpl implements EcgDto {
         this.time = time;
         this.voltage = voltage;
     }
-bruger vi denne konstruktør?
+ vi bruger ikke denne konstruktør?
  */
 
     @Override
