@@ -4,7 +4,9 @@ import java.sql.Timestamp;
 
 public class EcgDtoImpl implements EcgDto {
     //denne klasse har erstattet vores tidligere klasse EcgDataImpl
-    private String patientId;
+    //databærende klasse, svarer til tabellen ecgData
+    //bruges til at transportere data hele vejen igennem applikationen
+    private String patientId; //attributterne svarer
     private Timestamp time;
     private double voltage;
 

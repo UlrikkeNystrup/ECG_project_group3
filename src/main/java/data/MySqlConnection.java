@@ -4,14 +4,14 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
-//dennne klasse opretter forbindelsen til databasen
+//denne klasse opretter forbindelsen til databasen
 public class MySqlConnection {
 
     //Create a Connection object
     private static Connection connection;
 
     //Create a Connection method
-    public static Connection getConnection(){
+    public static Connection getConnection(){ //klassemetode, derfor man bruger nøgleordet Static
         try {
             if (connection==null || connection.isClosed()) {
                 connection = DriverManager.getConnection("jdbc:mysql://db.caprover.diplomportal.dk/s215849?"

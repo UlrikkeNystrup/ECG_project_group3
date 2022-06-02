@@ -13,12 +13,13 @@ public class EcgDaoImpl implements EcgDao {
     public void save(EcgDtoImpl ecgDto) {
         // denne metode bruger vi til at gemme EKG data i tabellen EcgData i databasen
         Connection connection= MySqlConnection.getConnection();
+        //getConnection() er implementeret i klassen MySQLConnection, getConnection() er en klassemetode, skal man ikke oprette et objekt for at kalde metoden
         try {
             PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO ecgData(patientId, time, voltage) VALUES (?,?,?)");
             preparedStatement.setString(1,ecgDto.getPatientId());
             preparedStatement.setTimestamp(2,ecgDto.getTime());
             preparedStatement.setDouble(3,ecgDto.getVoltage());
-            preparedStatement.execute();
+            preparedStatement.execute(); //execute() eksekverer SQL forespørgslen
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -32,7 +33,7 @@ public class EcgDaoImpl implements EcgDao {
         try {
             PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM ecgData WHERE time > ? ");
             preparedStatement.setTimestamp(2,time);
-            ResultSet resultSet = preparedStatement.executeQuery();
+            ResultSet resultSet = preparedStatement.executeQuery(); //executeQuery() bruges, da vi vil hente data, returnerer et resultSet
             while(resultSet.next()){
                 EcgDtoImpl ecgDto = new EcgDtoImpl();
                 ecgDto.setPatientId(resultSet.getString("patientId"));
