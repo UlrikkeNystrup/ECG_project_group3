@@ -10,7 +10,7 @@ public class MySqlConnection {
     //Create a Connection object
     private static Connection connection;
 
-    //Create a Connection method
+    //Create a Connection method  -- en klasse metode, derfor behøves der ikke oprettes et objekt
     public static Connection getConnection(){ //klassemetode, derfor man bruger nøgleordet Static
         try {
             if (connection==null || connection.isClosed()) {
