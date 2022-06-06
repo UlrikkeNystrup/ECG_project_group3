@@ -1,4 +1,6 @@
+
 package ProducerConsumer;
+
 
 // producer klassen implementerer et Runnable interface for at aktivere tråden
 public class Producer implements Runnable {
