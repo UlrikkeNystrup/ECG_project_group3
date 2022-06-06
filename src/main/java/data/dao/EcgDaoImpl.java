@@ -12,16 +12,34 @@ public class EcgDaoImpl implements EcgDao {
     @Override
     public void save(EcgDtoImpl ecgDto) {
         // denne metode bruger vi til at gemme EKG data i tabellen EcgData i databasen
-        Connection connection= MySqlConnection.getConnection();
+        /*Connection connection= MySqlConnection.getConnection(); vi kalder getConnction på MySQLConnection, som vi ikke behøver at oprette objekt for
+        Fordi vi har importeret: import data.MySqlConnection;, getConnetion metoden returnerer et connection objekt hvilket bliver gemt som
+        Connection objekt her inde og navngivet connection */
+
         try {
+            Connection connection= MySqlConnection.getConnection();
+            connection.setAutoCommit(false);
+
             PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO ecgData(patientId, time, voltage) VALUES (?,?,?)");
-            preparedStatement.setString(1,ecgDto.getPatientId());
-            preparedStatement.setTimestamp(2,ecgDto.getTime());
-            preparedStatement.setDouble(3,ecgDto.getVoltage());
-            preparedStatement.execute();
-        } catch (SQLException e) {
-            e.printStackTrace();
+            for (int i = 0; i < 4; i++) {
+                preparedStatement.setString(1, ecgDto.getPatientId());
+                preparedStatement.setTimestamp(2, ecgDto.getTime());
+                preparedStatement.setDouble(3, ecgDto.getVoltage());
+                preparedStatement.addBatch();
+
+                //preparedStatement.execute();
+            }
+
+            preparedStatement.executeBatch();
+            connection.commit();
         }
+            catch (SQLException e) {
+                e.printStackTrace();
+            }
+
+            // preparedStatement.close(); ???
+
+
     }
 
     @Override
