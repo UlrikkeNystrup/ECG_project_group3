@@ -9,20 +9,26 @@ import java.util.List;
 
 public class EcgDaoImpl implements EcgDao {
 
+    // denne metode bruger vi til at gemme EKG data i tabellen EcgData i databasen
+    //getConnection() er implementeret i klassen MySQLConnection, getConnection() er en klassemetode, skal man ikke oprette et objekt for at kalde metoden
     @Override
-    public void save(EcgDtoImpl ecgDto) {
-        // denne metode bruger vi til at gemme EKG data i tabellen EcgData i databasen
-        Connection connection= MySqlConnection.getConnection();
-        //getConnection() er implementeret i klassen MySQLConnection, getConnection() er en klassemetode, skal man ikke oprette et objekt for at kalde metoden
+    public void save(List <EcgDtoImpl> ecgDtoList) {
         try {
+            Connection connection= MySqlConnection.getConnection();
+            // connection.setAutoCommit(false); //måske unødvendigt med denne linje
             PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO ecgData(patientId, time, voltage) VALUES (?,?,?)");
-            preparedStatement.setString(1,ecgDto.getPatientId());
-            preparedStatement.setTimestamp(2,ecgDto.getTime());
-            preparedStatement.setDouble(3,ecgDto.getVoltage());
-            preparedStatement.execute(); //execute() eksekverer SQL forespørgslen
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+
+            for (EcgDtoImpl ecgDtoImpl: ecgDtoList ) {
+                preparedStatement.setString(1, ecgDtoImpl.getPatientId());
+                preparedStatement.setTimestamp(2, ecgDtoImpl.getTime());
+                preparedStatement.setDouble(3, ecgDtoImpl.getVoltage());
+                preparedStatement.addBatch();
+            }
+                preparedStatement.executeBatch();
+                //connection.commit(); //nok unødvendigt
+            }catch (SQLException e) {
+                 e.printStackTrace();
+            }
     }
 
     @Override

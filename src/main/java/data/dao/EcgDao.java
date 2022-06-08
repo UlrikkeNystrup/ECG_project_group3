@@ -6,6 +6,7 @@ import java.sql.Timestamp;
 import java.util.List;
 
 public interface EcgDao {
-    void save(EcgDtoImpl ecgDto);
+    //void save(EcgDtoImpl ecgDto);
+    void save(List <EcgDtoImpl> ecgDtoList);
     List<EcgDtoImpl> load(Timestamp time);
 }

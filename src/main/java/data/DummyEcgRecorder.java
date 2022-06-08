@@ -24,7 +24,7 @@ public class DummyEcgRecorder implements EcgDataRecorder {
                         if(observer != null) {
                             observer.notify(ecgDtoImpl); //notify() svarer til det man normalt kalder update() metode
                         } //så når notify() kaldes (her record() ), så kaldes update() metoden (her notify() )
-                        Thread.sleep(25); //venter 25 ms.
+                        Thread.sleep(2); //venter 25 ms. ændret til 2 milisek
                     }
                 } catch (InterruptedException e) { //fordi vi bruger sleep() metoden
                     e.printStackTrace();
