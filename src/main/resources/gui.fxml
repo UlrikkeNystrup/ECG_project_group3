@@ -8,7 +8,7 @@
 <?import javafx.scene.text.*?>
 
 <AnchorPane prefHeight="401.0" prefWidth="597.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.EcgGuiController">
-
+    <!-- onMouseClicked er en metode der udføres når der trykkes på knappen "Start Måling" på scenen. Så kaldes metoden "startEcg" i EcgGuiController klassen -->
     <Button fx:id = "startknap" layoutX="8.0" layoutY="64.0" mnemonicParsing="false" onMouseClicked="#startEcg" prefHeight="40.0" prefWidth="155.0" style="-fx-background-color: #16cd2b;" text="Start Måling" textFill="#161716">
       <font>
          <Font name="System Bold" size="18.0" />
@@ -70,7 +70,6 @@
    <AnchorPane layoutX="166.0" layoutY="1.0" prefHeight="259.0" prefWidth="491.0">
       <children>
          <Polyline fx:id="ecgLine">
-
          </Polyline>
       </children>
    </AnchorPane>

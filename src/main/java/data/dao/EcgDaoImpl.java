@@ -9,32 +9,32 @@ import java.util.List;
 
 public class EcgDaoImpl implements EcgDao {
 
-    @Override
-    public void save(EcgDtoImpl ecgDto) {
+    //@Override
+  //  public void save(EcgDtoImpl ecgDto) {
         // denne metode bruger vi til at gemme EKG data i tabellen EcgData i databasen
         /*Connection connection= MySqlConnection.getConnection(); vi kalder getConnction på MySQLConnection, som vi ikke behøver at oprette objekt for
         Fordi vi har importeret: import data.MySqlConnection;, getConnetion metoden returnerer et connection objekt hvilket bliver gemt som
         Connection objekt her inde og navngivet connection */
 
+    // denne metode bruger vi til at gemme EKG data i tabellen EcgData i databasen
+    //getConnection() er implementeret i klassen MySQLConnection, getConnection() er en klassemetode, skal man ikke oprette et objekt for at kalde metoden
+    @Override
+    public void save(List <EcgDtoImpl> ecgDtoList) {
         try {
             Connection connection= MySqlConnection.getConnection();
-            connection.setAutoCommit(false);
-
+            // connection.setAutoCommit(false); //måske unødvendigt med denne linje
             PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO ecgData(patientId, time, voltage) VALUES (?,?,?)");
-            for (int i = 0; i < 4; i++) {
-                preparedStatement.setString(1, ecgDto.getPatientId());
-                preparedStatement.setTimestamp(2, ecgDto.getTime());
-                preparedStatement.setDouble(3, ecgDto.getVoltage());
+
+            for (EcgDtoImpl ecgDtoImpl: ecgDtoList ) {
+                preparedStatement.setString(1, ecgDtoImpl.getPatientId());
+                preparedStatement.setTimestamp(2, ecgDtoImpl.getTime());
+                preparedStatement.setDouble(3, ecgDtoImpl.getVoltage());
                 preparedStatement.addBatch();
-
-                //preparedStatement.execute();
             }
-
-            preparedStatement.executeBatch();
-            connection.commit();
-        }
-            catch (SQLException e) {
-                e.printStackTrace();
+                preparedStatement.executeBatch();
+                //connection.commit(); //nok unødvendigt
+            }catch (SQLException e) {
+                 e.printStackTrace();
             }
 
             // preparedStatement.close(); ???

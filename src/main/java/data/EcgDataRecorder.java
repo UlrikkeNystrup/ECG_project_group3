@@ -1,8 +1,8 @@
 package data;
 
 import business.EcgObserver;
-//subjekt, interface
+
 public interface EcgDataRecorder {
-    void record(); //notify
-    void setObserver(EcgObserver observer);
+    void record(); //svarer til notify()
+    void setObserver(EcgObserver observer); //svarer til registerObserver()
 }

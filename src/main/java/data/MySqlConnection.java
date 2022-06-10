@@ -11,7 +11,8 @@ public class MySqlConnection {
     private static Connection connection;
 
     //Create a Connection method
-    public static Connection getConnection(){ // metode typen er Connection, dermed skal metoden returnere et connection objekt (ligesom hvis det vat en int eller double)
+    public static Connection getConnection(){ // metode typen er Connection, dermed skal metoden returnere et connection objekt (ligesom hvis det vat en i
+        // nt eller double)//klassemetode, derfor man bruger nøgleordet Static
         try {
             if (connection==null || connection.isClosed()) {
                 connection = DriverManager.getConnection("jdbc:mysql://db.caprover.diplomportal.dk/s215849?"

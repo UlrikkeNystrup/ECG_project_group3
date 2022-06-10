@@ -11,8 +11,8 @@ public class DummyEcgRecorder implements EcgDataRecorder {
     private EcgObserver observer;
 
     @Override
-    public void record() { //Notify
-        new Thread(new Runnable() { //Bruger runnable interfacet
+    public void record() {
+        new Thread(new Runnable() {
             @Override
             public void run() {
                 try {
@@ -22,7 +22,7 @@ public class DummyEcgRecorder implements EcgDataRecorder {
                         ecgDtoImpl.setTime(new Timestamp(System.currentTimeMillis())); //returnerer aktuel tid i millisekunder, Timestamp er
                         ecgDtoImpl.setVoltage(Math.random()*200*(-1)+200);
                         if(observer != null) {
-                            observer.notify(ecgDtoImpl); //kalder handle() eller Update()
+                            observer.notify(ecgDtoImpl);
                         }
                         Thread.sleep(25);
                     }
@@ -37,5 +37,5 @@ public class DummyEcgRecorder implements EcgDataRecorder {
     @Override
     public void setObserver(EcgObserver observer) {
         this.observer=observer;
-    } //vi implementerer en metode der kan sætte en observer
+    } //vi sætter en observer
 }
