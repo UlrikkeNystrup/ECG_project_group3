@@ -57,7 +57,7 @@
                    <Font size="40.0" />
                </font>
            </Label>
-           <Label contentDisplay="CENTER" text="60" textFill="#2e9016" GridPane.columnIndex="2" GridPane.rowIndex="1">
+           <Label fx:id="puls" contentDisplay="CENTER" text="60" textFill="#2e9016" GridPane.columnIndex="2" GridPane.rowIndex="1">
                <GridPane.margin>
                    <Insets left="50.0" />
                </GridPane.margin>

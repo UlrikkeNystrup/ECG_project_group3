@@ -11,20 +11,20 @@ public class DummyEcgRecorder implements EcgDataRecorder {
     private EcgObserver observer;
 
     @Override
-    public void record() {
+    public void record() { //record svarer til notify()
         new Thread(new Runnable() {
             @Override
             public void run() {
                 try {
-                    //Dumy data generering
+                    //Dummy data generering
                     while(true) {
                         EcgDtoImpl ecgDtoImpl = new EcgDtoImpl();
                         ecgDtoImpl.setTime(new Timestamp(System.currentTimeMillis())); //returnerer aktuel tid i millisekunder, Timestamp er
                         ecgDtoImpl.setVoltage(Math.random()*200*(-1)+200);
                         if(observer != null) {
-                            observer.notify(ecgDtoImpl);
+                            observer.update(ecgDtoImpl);
                         }
-                        Thread.sleep(25);
+                        Thread.sleep(5);
                     }
                 } catch (InterruptedException e) {
                     e.printStackTrace();
