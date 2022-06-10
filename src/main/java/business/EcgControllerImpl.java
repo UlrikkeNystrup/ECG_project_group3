@@ -28,6 +28,7 @@ public class EcgControllerImpl implements EcgController, EcgObserver {
         this.observer = ecgObserver;
     }
 
+
     @Override
     public void update(EcgDtoImpl ecgDtoImpl) {
         if(observer!=null){
