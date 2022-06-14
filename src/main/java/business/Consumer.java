@@ -1,40 +1,60 @@
 package business;
 
-import data.dto.EcgDto;
+import data.dao.EcgDaoImpl;
+import data.dto.EcgDtoImpl;
 
-import java.sql.SQLOutput;
 import java.util.LinkedList;
+import java.util.List;
 
 public class Consumer implements Runnable {
+    private static final int MAX_SIZE = 1500;
+    private final EcgDaoImpl dataDAO = new EcgDaoImpl();
+    private final LinkedList<EcgDtoImpl> queue = new LinkedList<>();
+    private final Object emptyLock = new Object();
 
-    private final LinkedList<EcgDto> queue;
-    private  Object noItem;
 
-    public Consumer(LinkedList<EcgDto> queue, Object emptyLock ) {
-        this.queue = queue;
-        this.noItem = emptyLock;
+    public void enqueue(EcgDtoImpl data){
+        synchronized (queue){
+            // In case buffer is overrun, we just drop data -
+            // This is instead of Pausing the producer if the queue is full. (fullLock)
+            if (queue.size()<MAX_SIZE) {
+                queue.add(data);
+            }
+        }
     }
 
+    public void waitOnEmpty() throws InterruptedException {
+        synchronized (emptyLock){
+            emptyLock.wait();
+        }
+    }
 
+    public void notifyOnEmpty(){
+        synchronized (emptyLock){
+            emptyLock.notifyAll();
+        }
+    }
     @Override
     public void run() {
-        while (true){
-            synchronized (queue){
-                if (!queue.isEmpty()){
-                    LinkedList<EcgDto> saveList = new LinkedList<EcgDto>();
-                    saveList.addAll(queue);
-                    queue.clear();
-                    System.out.println("Saving some data! : " + saveList.toString());
-                    //TODO: Save the data!
+        while(true){
+            if (queue.isEmpty()){
+                try {
+                    //This makes the Thread pause until the producer wakes it up
+                    waitOnEmpty();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                    break;
                 }
             }
-            try {
-                //simulation af et langsomt gemme forsøg
-                Thread.sleep(1600);
-            }  catch (InterruptedException e){
-                e.printStackTrace();
+            List<EcgDtoImpl> listCopy;
+            synchronized (queue){
+                //Take a copy of list and empty it;
+                listCopy = new LinkedList<>();
+                listCopy.addAll(queue);
+                queue.clear();
+
             }
-            System.out.println("Parker siger: Removed som snazzy data!");
+            dataDAO.save(listCopy);
         }
     }
 }

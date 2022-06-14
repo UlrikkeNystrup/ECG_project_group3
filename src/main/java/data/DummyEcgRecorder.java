@@ -4,11 +4,20 @@ import business.EcgObserver;
 import data.dto.EcgDtoImpl;
 
 import java.sql.Timestamp;
+import java.util.UUID;
 
 //Subject
 //denne klasse genererer simulerede EKG data
+
 public class DummyEcgRecorder implements EcgDataRecorder {
     private EcgObserver observer;
+
+    private final long waitingTime;
+
+    public DummyEcgRecorder(long waitingTime){
+        this.waitingTime =waitingTime;
+    }
+
 
     @Override
     public void record() { //record svarer til notify()
@@ -16,6 +25,7 @@ public class DummyEcgRecorder implements EcgDataRecorder {
             @Override
             public void run() {
                 try {
+
                     //Dummy data generering
                     while(true) {
                         EcgDtoImpl ecgDtoImpl = new EcgDtoImpl();
@@ -24,7 +34,7 @@ public class DummyEcgRecorder implements EcgDataRecorder {
                         if(observer != null) {
                             observer.update(ecgDtoImpl);
                         }
-                        Thread.sleep(5);
+                        Thread.sleep(waitingTime);
                     }
                 } catch (InterruptedException e) {
                     e.printStackTrace();
