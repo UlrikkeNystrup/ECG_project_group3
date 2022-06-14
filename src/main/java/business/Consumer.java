@@ -7,7 +7,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 public class Consumer implements Runnable {
-    private static final int MAX_SIZE = 1500;
+    private static final int MAX_SIZE = 1000;
     private final EcgDaoImpl dataDAO = new EcgDaoImpl();
     private final LinkedList<EcgDtoImpl> queue = new LinkedList<>();
     private final Object emptyLock = new Object();

@@ -12,9 +12,10 @@ import java.util.List;
 //denne klasse er både subjekt og observer, da den implementerer de to interfaces?
 public class EcgControllerImpl implements EcgController, EcgObserver {
     private static String CPR; //attribut fra fx:id i gui.fxml filen
-    private EcgDataRecorder ecgDataRecorder = new DummyEcgRecorder(5);
+    private EcgDataRecorder ecgDataRecorder = new DummyEcgRecorder(25);
     private EcgObserver observer;
     Consumer consumer = new Consumer();
+    private int counter =0;
     //private EcgDaoImpl ecgDaoImpl = new EcgDaoImpl();
 
 
@@ -23,6 +24,7 @@ public class EcgControllerImpl implements EcgController, EcgObserver {
         this.CPR = text;
         ecgDataRecorder.record(); //record() kaldes på DummyEcgDataRecorder objekt, metoden er implementeret i DummyEcgRecorder
         ecgDataRecorder.setObserver(this);
+        new Thread(consumer).start();
     }
 
 
@@ -35,12 +37,14 @@ public class EcgControllerImpl implements EcgController, EcgObserver {
     @Override
     public void update(EcgDtoImpl ecgDtoImpl) {
         if(observer!=null){
-            observer.update(ecgDtoImpl); //hvilken updatemetode bliver kaldt?
+            if (counter ==0) {
+                observer.update(ecgDtoImpl); //hvilken updatemetode bliver kaldt?
+                counter = 5;}
+            else{ counter--;} //vi laver en counter, medfører at brugergrænsefladen kun opdtateres ved hver femte datasæt (så brugergrænsefladen kan følge med)
         }
         ecgDtoImpl.setPatientId(CPR); //indsætter data for patientId fra tekstfeltet CPR
         if (CPR != null && !CPR.isEmpty()) { //kun hvis der skrives et CPR i tekstfeltet skal data gemmes
-            consumer = new Consumer();
-            new Thread(consumer).start();
+
             consumer.enqueue(ecgDtoImpl);
             //This wakes up the consumer to save data
             consumer.notifyOnEmpty();
