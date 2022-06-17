@@ -85,7 +85,7 @@
       <font>
          <Font size="16.0" />
       </font></Button>
-   <Button layoutX="6.0" layoutY="250.0" mnemonicParsing="false" prefHeight="47.0" prefWidth="158.0" text="Registrer patient">
+   <Button fx:id="RegPt" onAction="#nySide" layoutX="6.0" layoutY="250.0" mnemonicParsing="false" prefHeight="47.0" prefWidth="158.0" text="Registrer patient">
       <font>
          <Font size="16.0" />
       </font></Button>
