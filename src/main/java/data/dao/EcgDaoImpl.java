@@ -22,7 +22,7 @@ public class EcgDaoImpl implements EcgDao {
             Connection connection= MySqlConnection.getConnection();
             //connection.setAutoCommit(false); //overflødig fordi vi kun laver én type forespørgsel
 
-            System.out.println("Start: " + System.currentTimeMillis());
+            //System.out.println("Start: " + System.currentTimeMillis());
 
             PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO ecgData(patientId, time, voltage) VALUES (?,?,?)");
 
@@ -36,7 +36,7 @@ public class EcgDaoImpl implements EcgDao {
             }
                 preparedStatement.executeBatch();
                 //connection.commit(); //nok unødvendigt
-                System.out.println("Batch indsat: " + System.currentTimeMillis());
+                //System.out.println("Batch indsat: " + System.currentTimeMillis());
 
             }catch (SQLException e) {
                  e.printStackTrace();
