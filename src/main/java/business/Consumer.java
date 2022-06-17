@@ -7,7 +7,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 public class Consumer implements Runnable {
-    private static final int MAX_SIZE = 1000;
+    private static final int MAX_SIZE = 1500; //størrelse på køen
     private final EcgDaoImpl dataDAO = new EcgDaoImpl();
     private final LinkedList<EcgDtoImpl> queue = new LinkedList<>();
     private final Object emptyLock = new Object();
@@ -23,7 +23,7 @@ public class Consumer implements Runnable {
         }
     }
 
-    public void waitOnEmpty() throws InterruptedException {
+    public void waitWhenEmpty() throws InterruptedException { //Når metoden kaldes venter consumeren med at tage data ind i databasen
         synchronized (emptyLock){
             emptyLock.wait();
         }
@@ -40,7 +40,7 @@ public class Consumer implements Runnable {
             if (queue.isEmpty()){
                 try {
                     //This makes the Thread pause until the producer wakes it up
-                    waitOnEmpty();
+                    waitWhenEmpty();
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                     break;

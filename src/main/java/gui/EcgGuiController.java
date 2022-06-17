@@ -5,14 +5,21 @@ import business.EcgController;
 import business.EcgControllerImpl;
 import data.dto.EcgDto;
 import data.dto.EcgDtoImpl;
+import javafx.event.ActionEvent;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
 import javafx.scene.paint.Paint;
 import javafx.scene.shape.Polyline;
+import javafx.stage.Stage;
+
+import java.io.IOException;
 
 //denne klasse implementerer Observer interfacet, så er en Observer
 // Vil gerne vide når der er sket ændringer med Observable/subject DummyEcgRecorder.
@@ -21,6 +28,7 @@ public class EcgGuiController implements EcgObserver {
     public TextField CPR;
     public Button startknap; //bruges ikke endnu, men skal bruges til at ændre farven+teksten på startknap til stopknap
     public Label puls;
+    public Button RegPt;
 
     private EcgController ecgController = new EcgControllerImpl();
     long startTime = 0;
@@ -41,6 +49,15 @@ public class EcgGuiController implements EcgObserver {
     }
 
 
-
-
+    public void nySide(ActionEvent actionEvent) {
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/gui2.fxml"));
+        try {
+            AnchorPane anchorPane = fxmlLoader.load();
+            Stage loadStage = new Stage();
+            loadStage.setScene(new Scene(anchorPane));
+            loadStage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 }
