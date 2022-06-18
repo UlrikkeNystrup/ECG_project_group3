@@ -1,23 +1,38 @@
 package data.dao;
 
+import data.MySqlConnection;
+import data.dto.EcgDtoImpl;
 import data.dto.PatientDtoImpl;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import java.util.List;
 
 public class PatientDaoImpl implements PatientDao{
-    @Override
+    PatientDtoImpl ptDto = new PatientDtoImpl();
+
+    /*@Override
     public List<PatientDtoImpl> getAll() {
-        return null;
-    }
+       // return null;
+    }*/
 
     @Override
-    public PatientDtoImpl get(String patientId) {
-        return null;
-    }
+    public void save() {
+        try {
+            Connection connection= MySqlConnection.getConnection();
+            //connection.setAutoCommit(false); //overflødig fordi vi kun laver én type forespørgsel
 
-    @Override
-    public void save(PatientDtoImpl patientDtoImpl) {
+            PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO Patient(patientId, firstName, lastName) VALUES (?,?,?)");
 
+                preparedStatement.setString(1, ptDto.getPatientId());
+                preparedStatement.setString(2, ptDto.getFirstName());
+                preparedStatement.setString(3, ptDto.getLastName());
+                preparedStatement.execute();
+            }
+        catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override

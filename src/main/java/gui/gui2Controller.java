@@ -1,19 +1,37 @@
 package gui;
-
+import data.dao.PatientDaoImpl;
+import data.dto.PatientDtoImpl;
 import javafx.scene.control.TextField;
-
+import javafx.scene.input.MouseEvent;
 public class gui2Controller {
-    public TextField textField1;
-    public TextField textField2;
-    public TextField textField3;
+    PatientDtoImpl ptDto =new PatientDtoImpl();
+
+    PatientDaoImpl ptDao = new PatientDaoImpl();
+
+    private String ptId;
+    private String forName;
+    private String lastName;
+
+    public TextField text1;
+    public TextField text2;
+    public TextField text3;
+
+    public void savePtData(MouseEvent mouseEvent) {
+        /* String ptId;
+         String forName;
+         String lastNAme;*/
 
 
-    public void savePt(String ptId,String firstName,String lastName ){
-        this.textField1 = ptId;
-        this.textField2 = firstName;
-        this.textField3 = lastName;
+        ptId = text1.getText();
+        forName = text2.getText();
+        lastName = text3.getText();
 
+        ptDto.setPatientId(ptId);
+        ptDto.setFirstName(forName);
+        ptDto.setLastName(lastName);
+
+        //PatientDtoImpl ptInfo = new PatientDtoImpl(ptId, forName, lastName);
+        ptDao.save();
     }
-
-
 }
+
