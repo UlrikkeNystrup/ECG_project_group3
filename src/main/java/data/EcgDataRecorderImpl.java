@@ -14,11 +14,12 @@ public class EcgDataRecorderImpl implements EcgDataRecorder {
         new Thread(new Runnable() {
             @Override
             public void run() {
-                try {
+               /* try {
                     String answer = port.receiveData();
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
+                */
                 port.isClosed();
             }
 

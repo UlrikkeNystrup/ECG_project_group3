@@ -48,16 +48,17 @@ public class Arduino {
                 System.out.println("Kunne ikke aflæse data fra Ardunio. Tjek kommunikationskablet og prøv igen.");
                 serialPort.closePort();
                 System.exit(-1);
-            } catch (IOException e) {
-                e.printStackTrace();
+                //} catch (IOException e) {
+                //    e.printStackTrace();
+                //}
             }
-        }
-        // Vi returner den seneste string.
-        return svar;
+            // Vi returner den seneste string.
+
+        }return svar;
     }
 
 
-    public void isOpen() {
+    public void isOpen(){
         if (serialPort.openPort()) {
             System.out.println("Port is open :)");
         } else {
