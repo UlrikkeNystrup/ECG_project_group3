@@ -1,8 +1,11 @@
 package data.dto;
 
 public interface DoctorDto {
-    String getName();
-    void setName(String name);
-    String getId();
-    void setId(String id);
+
+    String getFirstName();
+    void setFirstName(String firstName);
+    String getLastName();
+    void setLastName(String lastName);
+    String getAuthId();
+    void setAuthId(String authId);
 }

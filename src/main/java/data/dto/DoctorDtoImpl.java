@@ -1,31 +1,31 @@
 package data.dto;
 
 public class DoctorDtoImpl implements DoctorDto {
-    //denne klasse bruger vi ikke endnu, da vi endnu ikke har implementeret DoctorDao
-    private String name;
-    private String id;
-
-    public DoctorDtoImpl(String name, String id) {
-        this.name = name;
-        this.id = id;
-    }
     @Override
-    public String getName() {
-        return name;
+    public String getFirstName() {
+        return null;
     }
 
     @Override
-    public void setName(String name) {
-        this.name = name;
+    public void setFirstName(String firstName) {
     }
 
     @Override
-    public String getId() {
-        return id;
+    public String getLastName() {
+        return null;
     }
 
     @Override
-    public void setId(String id) {
-        this.id = id;
+    public void setLastName(String lastName) {
     }
+
+    @Override
+    public String getAuthId() {
+        return null;
+    }
+
+    @Override
+    public void setAuthId(String authId) {
+    }
+
 }
