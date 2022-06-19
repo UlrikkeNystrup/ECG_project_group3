@@ -4,6 +4,7 @@ public class PatientDtoImpl implements PatientDto{
     private String firstName;
     private String lastName;
     private String patientId;
+    private String doctorId;
 
     //konstruktør
    /* public PatientDtoImpl(String firstName, String lastName, String patientId) {
@@ -41,4 +42,15 @@ public class PatientDtoImpl implements PatientDto{
     public void setPatientId(String patientId) {
     this.patientId = patientId;
     }
+
+
+    @Override
+    public String getDoctorId() { return doctorId;}
+
+    @Override
+    public void setDoctorId(String doctorId) {
+        this.doctorId = doctorId;
+    }
 }
+
+

@@ -23,11 +23,12 @@ public class PatientDaoImpl implements PatientDao{
             Connection connection= MySqlConnection.getConnection();
             //connection.setAutoCommit(false); //overflødig fordi vi kun laver én type forespørgsel
 
-            PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO Patient(patientId, firstName, lastName) VALUES (?,?,?)");
+            PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO patients (patientId, firstName, lastName, doctorId) VALUES (?,?,?,?)");
 
                 preparedStatement.setString(1, ptDto.getPatientId());
                 preparedStatement.setString(2, ptDto.getFirstName());
                 preparedStatement.setString(3, ptDto.getLastName());
+                preparedStatement.setString(4, ptDto.getDoctorId());
                 preparedStatement.execute();
             }
         catch (SQLException e) {

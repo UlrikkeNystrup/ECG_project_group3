@@ -7,4 +7,6 @@ public interface PatientDto {
     void setLastName(String lastName);
     String getPatientId();
     void setPatientId(String patientId);
+    String getDoctorId();
+    void setDoctorId(String doctorId);
 }
