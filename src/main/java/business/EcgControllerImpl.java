@@ -38,7 +38,7 @@ public class EcgControllerImpl implements EcgController, EcgObserver {
     public void update(EcgDtoImpl ecgDtoImpl) {
         if(observer!=null){
             if (counter ==0) {
-                observer.update(ecgDtoImpl); //hvilken updatemetode bliver kaldt?
+                observer.update(ecgDtoImpl);
                 counter = 5;}
             else{ counter--;} //vi laver en counter, medfører at brugergrænsefladen kun opdtateres ved hver femte datasæt (så brugergrænsefladen kan følge med)
         }

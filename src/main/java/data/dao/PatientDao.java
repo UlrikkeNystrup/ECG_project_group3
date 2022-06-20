@@ -8,7 +8,7 @@ public interface PatientDao {
     //List<PatientDtoImpl> getAll();
     //PatientDtoImpl get(String patientId);
 
-    void save();
+    void save(PatientDtoImpl patientDto);
 
     void update(PatientDtoImpl patientDtoImpl);
     void delete(String patientId);

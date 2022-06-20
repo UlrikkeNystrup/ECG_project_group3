@@ -9,4 +9,5 @@ public interface PatientDto {
     void setPatientId(String patientId);
     String getDoctorId();
     void setDoctorId(String doctorId);
+
 }

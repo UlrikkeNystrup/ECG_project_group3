@@ -12,6 +12,7 @@
              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                <ColumnConstraints />
+               <ColumnConstraints minWidth="10.0" prefWidth="100.0" />
 
            </columnConstraints>
            <rowConstraints>
@@ -25,9 +26,11 @@
                <TextField fx:id="text1" prefHeight="105.0" prefWidth="160.0" GridPane.rowIndex="1" />
                <TextField fx:id="text2" prefHeight="106.0" prefWidth="162.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                <TextField fx:id="text3" prefHeight="106.0" prefWidth="162.0" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+               <Label prefHeight="43.0" prefWidth="103.0" text="Doktor ID" GridPane.columnIndex="4" />
+               <TextField fx:id="text4" prefHeight="77.0" prefWidth="100.0" GridPane.columnIndex="4" GridPane.rowIndex="1" />
             </children>
          </GridPane>
       </children></FlowPane>
-   <Button onMouseClicked="#savePtData" fx:id="saveButton" layoutX="488.0" layoutY="72.0" mnemonicParsing="false" prefHeight="44.0" prefWidth="97.0" text="Gem" />
+   <Button fx:id="saveButton" layoutX="488.0" layoutY="72.0" mnemonicParsing="false" onMouseClicked="#savePtData" prefHeight="44.0" prefWidth="97.0" text="Gem" />
 
 </AnchorPane>
