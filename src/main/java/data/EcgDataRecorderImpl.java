@@ -2,6 +2,12 @@ package data;
 
 import business.EcgObserver;
 import business.Arduino;
+import data.dto.EcgDtoImpl;
+
+import java.io.IOException;
+import java.sql.Timestamp;
+
+import static java.lang.Double.parseDouble;
 
 public class EcgDataRecorderImpl implements EcgDataRecorder {
     private EcgObserver observer;
@@ -9,23 +15,30 @@ public class EcgDataRecorderImpl implements EcgDataRecorder {
 
     @Override
     public void record() { //record svarer til notify()
-        port.isOpen();
 
         new Thread(new Runnable() {
             @Override
             public void run() {
-               /* try {
+                while(true) {
                     String answer = port.receiveData();
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
+                    double ecgData = 0;
+                    if (answer.length() > 0){
+                        ecgData = parseDouble(answer);
+                    }
+                    EcgDtoImpl ecgDtoImpl = new EcgDtoImpl();
+                    ecgDtoImpl.setTime(new Timestamp(System.currentTimeMillis())); //returnerer aktuel tid i millisekunder, Timestamp er
+                    ecgDtoImpl.setVoltage(ecgData);
+                    if(observer != null) {
+                        observer.update(ecgDtoImpl);
+                    }
                 }
-                */
-                port.isClosed();
+
             }
 
         }).start();
     }
 
+    //port.isClosed();
 
     @Override
     public void setObserver(EcgObserver observer) {
