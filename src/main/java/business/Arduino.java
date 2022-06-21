@@ -50,7 +50,7 @@ public class Arduino {
 
         String svar = null; //lokal variabel
 
-        // Vi laver en while-loop for at sørge for vi får fat i alle beskederne.
+        // Vi laver en while-loop for at sørger for vi får fat i alle beskederne. (ville være bedre med et obseerver pattern da dette, er "busy wait")
         while (serialPort.bytesAvailable() > 0) { // formålet er at den læser alle beskeder på en gang
             try {
                 Thread.sleep(10);
