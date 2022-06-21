@@ -5,6 +5,7 @@ import business.EcgController;
 import business.EcgControllerImpl;
 import data.dto.EcgDto;
 import data.dto.EcgDtoImpl;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -45,7 +46,9 @@ public class EcgGuiController implements EcgObserver {
     @Override
     public void update(EcgDtoImpl ecgDtoImpl) { //notify() svarer til den metode man plejer at kalde update()
     //    ekgView.setText(ekgView.getText()+"\n" + ekgData);
-        ecgLine.getPoints().addAll(((ecgDtoImpl.getTime().getTime()*1.0)-startTime)/25,ecgDtoImpl.getVoltage());
+        Platform.runLater(()->
+                ecgLine.getPoints().addAll(((ecgDtoImpl.getTime().getTime()*1.0)-startTime)/25,200-ecgDtoImpl.getVoltage())        );
+
         //når man ganger med 1.0 så konverteres fra long til double. Dividerer med 25, for at få stregen længere ned på skærmen
     }
 

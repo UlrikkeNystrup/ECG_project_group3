@@ -6,13 +6,7 @@ import javafx.scene.input.MouseEvent;
 public class gui2Controller {
 
     PatientDtoImpl ptDto =new PatientDtoImpl();
-
     PatientDaoImpl ptDao = new PatientDaoImpl();
-
-    private String ptId;
-    private String forName;
-    private String lastName;
-    private String doctorId;
 
     public TextField text1;
     public TextField text2;
@@ -20,25 +14,26 @@ public class gui2Controller {
     public TextField text4;
 
     public void savePtData(MouseEvent mouseEvent) {
-        /* String ptId;
-         String forName;
-         String lastNAme;*/
 
-        ptId = text1.getText();
-        forName = text2.getText();
-        lastName = text3.getText();
-        doctorId = text4.getText();
+        String ptId = text1.getText();
+        String forName = text2.getText();
+        String lastName = text3.getText();
+        String doctorId = text4.getText();
 
         ptDto.setPatientId(ptId);
-        //System.out.println(ptId);
-        //System.out.println(ptDto.getPatientId());
-
         ptDto.setFirstName(forName);
         ptDto.setLastName(lastName);
         ptDto.setDoctorId(doctorId);
 
-        //PatientDtoImpl ptInfo = new PatientDtoImpl(ptId, forName, lastName);
+        // tidligere konstruktør: PatientDtoImpl ptInfo = new PatientDtoImpl(ptId, forName, lastName);
+       //kalder save som connecter til databasen og indsætter data i databasen
         ptDao.save(ptDto);
+
+        //Fjerner det indtastede data
+        text1.clear();
+        text2.clear();
+        text3.clear();
+        text4.clear();
     }
 }
 

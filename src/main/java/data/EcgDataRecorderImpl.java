@@ -4,14 +4,13 @@ import business.EcgObserver;
 import business.Arduino;
 import data.dto.EcgDtoImpl;
 
-import java.io.IOException;
 import java.sql.Timestamp;
 
 import static java.lang.Double.parseDouble;
 
 public class EcgDataRecorderImpl implements EcgDataRecorder {
     private EcgObserver observer;
-    private Arduino port = new Arduino("/dev/cu.usbmodem14201"); //indskriv rigtig port;
+    private Arduino arduino = new Arduino("/dev/cu.usbmodem14201"); //indskriv rigtig port;
 
     @Override
     public void record() { //record svarer til notify()
@@ -19,18 +18,21 @@ public class EcgDataRecorderImpl implements EcgDataRecorder {
         new Thread(new Runnable() {
             @Override
             public void run() {
+
                 while(true) {
-                    String answer = port.receiveData();
+                    String answer = arduino.receiveData();
                     double ecgData = 0;
-                    if (answer.length() > 0){
+                    if (answer!=null && answer.length() > 0){
                         ecgData = parseDouble(answer);
+                        if(observer != null) {
+                            EcgDtoImpl ecgDtoImpl = new EcgDtoImpl();
+                            ecgDtoImpl.setTime(new Timestamp(System.currentTimeMillis())); //returnerer aktuel tid i millisekunder, Timestamp er
+                            ecgDtoImpl.setVoltage(ecgData);
+                            observer.update(ecgDtoImpl);
+                        }
                     }
-                    EcgDtoImpl ecgDtoImpl = new EcgDtoImpl();
-                    ecgDtoImpl.setTime(new Timestamp(System.currentTimeMillis())); //returnerer aktuel tid i millisekunder, Timestamp er
-                    ecgDtoImpl.setVoltage(ecgData);
-                    if(observer != null) {
-                        observer.update(ecgDtoImpl);
-                    }
+
+
                 }
 
             }
