@@ -1,3 +1,4 @@
+//@author group 2: Ulrikke, Eva, Juliane, Simone og Mikael
 package gui;
 
 import business.EcgObserver;
@@ -30,7 +31,6 @@ public class EcgGuiController implements EcgObserver {
     private EcgController ecgController = new EcgControllerImpl();
     long startTime = 0;
 
-
 //metode til håndtering af "museevent", hvis der trykkes på knappen "Start måling"
     public void startEcg(MouseEvent mouseEvent) { //denne metode udføres ved muse-klik på knappen "Start Måling"
         ecgController.startRecording(CPR.getText()); //startRecording() kommer fra EcgControllerImpl
@@ -50,9 +50,8 @@ public class EcgGuiController implements EcgObserver {
             startTime = System.currentTimeMillis();
             ecgLine.getPoints().clear();
         }
-        //når man ganger med 1.0 så konverteres fra long til double. Dividerer med 25, for at få stregen længere ned på skærmen
-
-
+        //når man ganger med 1.0 så konverteres fra long til double. Dividerer med 8, for at få stregen længere ned på skærmen
+        //dividerer med 5 for at gøre takkerne på EKG-grafen mindre. Trækker det fra 1200 for at få grafen ind på vores AnchorPane
     }
 
 

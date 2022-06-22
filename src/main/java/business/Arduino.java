@@ -1,5 +1,5 @@
+//@author group 2: Ulrikke, Eva, Juliane, Simone og Mikael
 package business;
-
 import com.fazecast.jSerialComm.SerialPort;
 import com.fazecast.jSerialComm.SerialPortDataListener;
 import com.fazecast.jSerialComm.SerialPortEvent;

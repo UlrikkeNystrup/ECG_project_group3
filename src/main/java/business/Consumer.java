@@ -1,3 +1,4 @@
+//@author group 2: Ulrikke, Eva, Juliane, Simone og Mikael
 package business;
 
 import data.dao.EcgDaoImpl;
