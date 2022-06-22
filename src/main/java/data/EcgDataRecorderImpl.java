@@ -4,6 +4,7 @@ import business.EcgObserver;
 import business.Arduino;
 import data.dto.EcgDtoImpl;
 
+import java.io.IOException;
 import java.sql.Timestamp;
 
 import static java.lang.Double.parseDouble;
@@ -12,38 +13,35 @@ public class EcgDataRecorderImpl implements EcgDataRecorder {
     private EcgObserver observer;
     private Arduino arduino = new Arduino("/dev/cu.usbmodem14201"); //indskriv rigtig port;
 
+
     @Override
-    public void record() { //record svarer til notify()
-        System.out.println("Starting recording!");
+    public void record() {
         new Thread(new Runnable() {
             @Override
             public void run() {
+                try {
+                    while(true){
+                        Thread.sleep(1);
+                        if(observer!=null){
+                            String stringAnswer = arduino.receiveData();
+                            double ecgData = 0;
+                            if(stringAnswer.length()>0){
+                                ecgData = Double.parseDouble((stringAnswer));
+                                System.out.println("Recieved data" + ecgData);
 
-                while(true) {
-                    try {
-                        Thread.sleep(10);
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
-                    String answer = arduino.receiveData();
-                    System.out.println("LLOOOOPing" + answer);
-                    double ecgData = 0;
-                    if (answer!=null && answer.length() > 0){
-                        ecgData = parseDouble(answer);
-                        System.out.println("Got data: " + ecgData);
-                        if(observer != null) {
-                            EcgDtoImpl ecgDtoImpl = new EcgDtoImpl();
-                            ecgDtoImpl.setTime(new Timestamp(System.currentTimeMillis())); //returnerer aktuel tid i millisekunder, Timestamp er
-                            ecgDtoImpl.setVoltage(ecgData);
-                            observer.update(ecgDtoImpl);
+                                    EcgDtoImpl ecgDtoImpl = new EcgDtoImpl();
+                                    ecgDtoImpl.setTime(new Timestamp(System.currentTimeMillis()));
+                                    ecgDtoImpl.setVoltage(ecgData);
+                                    if(ecgData>200)
+                                    observer.update(ecgDtoImpl);
+
+                            }
                         }
                     }
-
-
+                } catch (InterruptedException e){
+                    e.printStackTrace();
                 }
-
             }
-
         }).start();
     }
 
@@ -52,7 +50,7 @@ public class EcgDataRecorderImpl implements EcgDataRecorder {
     @Override
     public void setObserver(EcgObserver observer) {
         this.observer = observer;
-    } //vi sætter en observer men til hvad
+    }
 
 }
 

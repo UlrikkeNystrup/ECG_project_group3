@@ -8,5 +8,5 @@ public interface EcgDto {
     void setVoltage(double voltage);
     double getVoltage();
     void setTime(Timestamp time);
-    Timestamp getTime();
+    Timestamp getTimeStamp();
 }

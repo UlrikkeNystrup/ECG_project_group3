@@ -36,13 +36,22 @@ public class EcgDtoImpl implements EcgDto {
     }
 
     @Override
-    public Timestamp getTime() {
+    public Timestamp getTimeStamp() {
         return time;
     }
 
     @Override
     public void setTime(Timestamp time) {
         this.time = time;
+    }
+
+    @Override
+    public String toString() {
+        return "EcgDtoImpl{" +
+                "patientId='" + patientId + '\'' +
+                ", time=" + time +
+                ", voltage=" + voltage +
+                '}';
     }
 }
 

@@ -3,7 +3,6 @@ package gui;
 import business.EcgObserver;
 import business.EcgController;
 import business.EcgControllerImpl;
-import data.dto.EcgDto;
 import data.dto.EcgDtoImpl;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
@@ -14,9 +13,6 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.Background;
-import javafx.scene.layout.BackgroundFill;
-import javafx.scene.paint.Paint;
 import javafx.scene.shape.Polyline;
 import javafx.stage.Stage;
 
@@ -46,22 +42,29 @@ public class EcgGuiController implements EcgObserver {
     @Override
     public void update(EcgDtoImpl ecgDtoImpl) { //notify() svarer til den metode man plejer at kalde update()
     //    ekgView.setText(ekgView.getText()+"\n" + ekgData);
+        System.out.println(ecgDtoImpl);
         Platform.runLater(()->
-                ecgLine.getPoints().addAll(((ecgDtoImpl.getTime().getTime()*1.0)-startTime)/25,200-ecgDtoImpl.getVoltage())        );
-
+        ecgLine.getPoints().addAll((((ecgDtoImpl.getTimeStamp().getTime()*1.0)-startTime)/8),(1200-ecgDtoImpl.getVoltage())/5));
+        //ecgLine.getPoints().addAll(((ecgDtoImpl.getTime().getTime()*1.0)-startTime)/25,200-ecgDtoImpl.getVoltage()) //til Dummyrecorder
+        if(((ecgDtoImpl.getTimeStamp().getTime()*1.0)-startTime)/8>450){
+            startTime = System.currentTimeMillis();
+            ecgLine.getPoints().clear();
+        }
         //når man ganger med 1.0 så konverteres fra long til double. Dividerer med 25, for at få stregen længere ned på skærmen
+
+
     }
 
 
     public void nySide(ActionEvent actionEvent) {
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/gui2.fxml"));
-        try {
-            AnchorPane anchorPane = fxmlLoader.load();
-            Stage loadStage = new Stage();
-            loadStage.setScene(new Scene(anchorPane));
-            loadStage.show();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/gui2.fxml"));
+            try {
+                AnchorPane anchorPane = fxmlLoader.load();
+                Stage loadStage = new Stage();
+                loadStage.setScene(new Scene(anchorPane));
+                loadStage.show();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
     }
 }

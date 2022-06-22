@@ -5,6 +5,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 
 public class ECGApp extends Application { //anvender Arv, Application class er en abstrakt klasse
 
@@ -20,5 +21,6 @@ public class ECGApp extends Application { //anvender Arv, Application class er e
         stage.setTitle("ECG App");
         stage.setScene(scene);
         stage.show();
+        stage.setOnCloseRequest((WindowEvent windowEvent)->System.exit(1));
     }
 }

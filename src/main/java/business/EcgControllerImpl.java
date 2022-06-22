@@ -39,9 +39,9 @@ public class EcgControllerImpl implements EcgController, EcgObserver {
     @Override
     public void update(EcgDtoImpl ecgDtoImpl) {
         if(observer!=null){
-           // if (counter ==0) {
+            //if (counter ==0) {
                 observer.update(ecgDtoImpl);
-               // counter = 5;}
+             //  counter = 5;}
             //else{ counter--;} //vi laver en counter, medfører at brugergrænsefladen kun opdtateres ved hver femte datasæt (så brugergrænsefladen kan følge med)
         }
         ecgDtoImpl.setPatientId(CPR); //indsætter data for patientId fra tekstfeltet CPR

@@ -1,8 +1,16 @@
 package gui;
 import data.dao.PatientDaoImpl;
 import data.dto.PatientDtoImpl;
+import javafx.event.ActionEvent;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
+import javafx.stage.Stage;
+
+import java.io.IOException;
+
 public class gui2Controller {
 
     PatientDtoImpl ptDto =new PatientDtoImpl();
@@ -34,6 +42,18 @@ public class gui2Controller {
         text2.clear();
         text3.clear();
         text4.clear();
+    }
+
+    public void side3(ActionEvent actionEvent) {
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/gui3.fxml"));
+            try {
+                AnchorPane anchorPane = fxmlLoader.load();
+                Stage loadStage = new Stage();
+                loadStage.setScene(new Scene(anchorPane));
+                loadStage.show();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
     }
 }
 

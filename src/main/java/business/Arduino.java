@@ -12,19 +12,18 @@ import java.io.PrintWriter;
 
 public class Arduino {
     private SerialPort serialPort = null;
-    private BufferedReader portIn;
+    private BufferedReader bufferedReader;
 
     //opretter en konstruktør, der tager en string parameter, så man kan sætte portnavnet
     public Arduino(String port) {
         try {
             serialPort = SerialPort.getCommPort(port); //kalder klassemetoden getCommPort(String portDescriptor)
             serialPort.openPort(); //åbner porten vha. openPort() metoden som kaldes på serialPort objektet
-            /*serialPort.addDataListener(new SerialPortDataListener() {
+            /*serialPort.addDataListener(new SerialPortDataListener() { //løsning på busywait problem
                 @Override
                 public int getListeningEvents() {
                     return 1;
                 }
-
                 @Override
                 public void serialEvent(SerialPortEvent serialPortEvent) {
                     if (serialPortEvent.getEventType() != 1){
@@ -37,51 +36,42 @@ public class Arduino {
             System.out.println("port is open");
             serialPort.setComPortParameters(38400, Byte.SIZE, SerialPort.ONE_STOP_BIT, SerialPort.NO_PARITY); //sætter seriel kommunikation parametre, bithastighed, 8 databit, 1 stop, 0 paritetsbit (samme som i Arduino)
             //serialPort.setFlowControl(SerialPort.FLOW_CONTROL_DISABLED);  //specificerer flowcontrol for porten, metoden er: setFlowControl(int newFlowControlSettings). FLOW_CONTROL_DISABLED er en indbygget konstant
-            portIn = new BufferedReader(new InputStreamReader(serialPort.getInputStream()));
+            bufferedReader = new BufferedReader(new InputStreamReader(serialPort.getInputStream()));
         } catch (Exception e) {
             System.out.println("SerialPortException: " + e);
         }
     }
-    //this.portIn = new BufferedReader(new InputStreamReader(serialPort.getInputStream()));
 
     // Intern metode for os, som vi kan bruge til at sende data direkte til arduino.
     public String receiveData() {
-         //åbner porten vha. openPort() metoden som kaldes på serialPort objektet
-
         String svar = null; //lokal variabel
-
         // Vi laver en while-loop for at sørger for vi får fat i alle beskederne. (ville være bedre med et obseerver pattern da dette, er "busy wait")
-        while (serialPort.bytesAvailable() > 0) { // formålet er at den læser alle beskeder på en gang
-            try {
-                Thread.sleep(10);
-            } catch (InterruptedException e) {
-                System.out.println(e);
+        try {
+            while (serialPort.bytesAvailable() < 1) {
+
+                try {Thread.sleep(3);
+                }
+                catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
             }
-            // Try, catch. Vi har defineret en custom timeout på 5sek, hvis det tager længere tid, så smider vi en error ud.
-            try {
-                svar = portIn.readLine();
+            if (serialPort.bytesAvailable() > 4 ) {
+                 svar = bufferedReader.readLine();
                 //System.out.println("[HARDWARE] " + svar);
-
-            } catch (SerialPortTimeoutException e) { // Hvis det tager længere end 100ms at læse en linje.
+            }
+        } catch (SerialPortTimeoutException e) { // Hvis det tager længere end 100ms at læse en linje.
                 System.out.println("Kunne ikke aflæse data fra Ardunio til tiden. Tjek kommunikationskablet og prøv igen.");
-
                 serialPort.closePort();
                 System.exit(-1);
                 // For alle de andre fejl.
-            } catch (IOException e) {
+        } catch (IOException e) {
                 System.out.println("Fejlkode:" + e);
                 System.out.println("Kunne ikke aflæse data fra Ardunio. Tjek kommunikationskablet og prøv igen.");
                 serialPort.closePort();
                 System.exit(-1);
-                //} catch (IOException e) {
-                //    e.printStackTrace();
-                //}
-            }
-            // Vi returner den seneste string.
-
-        }return svar;
+        }
+        return svar;// Vi returner den seneste string.
     }
-
 
     public void isOpen(){
         if (serialPort.openPort()) {

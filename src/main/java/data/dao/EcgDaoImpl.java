@@ -28,7 +28,7 @@ public class EcgDaoImpl implements EcgDao {
 
             for (EcgDtoImpl ecgDtoImpl: ecgDtoList ) {
                 preparedStatement.setString(1, ecgDtoImpl.getPatientId());
-                preparedStatement.setTimestamp(2, ecgDtoImpl.getTime());
+                preparedStatement.setTimestamp(2, ecgDtoImpl.getTimeStamp());
                 preparedStatement.setDouble(3, ecgDtoImpl.getVoltage());
                 preparedStatement.addBatch();
 
